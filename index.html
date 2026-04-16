@@ -511,6 +511,268 @@
             0 30px 80px -20px rgba(15,23,42,0.08),
             0 10px 30px -15px rgba(15,23,42,0.05);
         }
+
+        /* EEG Data Upload Chat Widget */
+        .eeg-widget-btn {
+            position: fixed;
+            bottom: 2rem;
+            left: 2rem;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.35);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            z-index: 110;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .eeg-widget-btn:hover {
+            transform: scale(1.08);
+            box-shadow: 0 12px 32px rgba(102, 126, 234, 0.45);
+        }
+        .eeg-widget-btn:active {
+            transform: scale(0.96);
+        }
+        .eeg-dialog {
+            position: fixed;
+            bottom: 5.5rem;
+            left: 2rem;
+            width: 380px;
+            max-width: calc(100vw - 2rem);
+            height: 520px;
+            max-height: calc(100vh - 7rem);
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+            z-index: 111;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px) scale(0.96);
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .eeg-dialog.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+        .eeg-dialog-header {
+            padding: 1rem 1.25rem;
+            background: rgba(255, 255, 255, 0.5);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .eeg-dialog-header h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .eeg-close-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(0,0,0,0.04);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #5a5a6a;
+            transition: background 0.2s;
+        }
+        .eeg-close-btn:hover {
+            background: rgba(0,0,0,0.08);
+        }
+        .eeg-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1rem 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        .eeg-msg {
+            max-width: 85%;
+            padding: 0.75rem 1rem;
+            border-radius: 16px;
+            font-size: 0.875rem;
+            line-height: 1.5;
+            word-break: break-word;
+            animation: msgPop 0.3s ease;
+        }
+        @keyframes msgPop {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .eeg-msg.bot {
+            align-self: flex-start;
+            background: rgba(255,255,255,0.9);
+            color: var(--primary);
+            border: 1px solid rgba(0,0,0,0.05);
+            border-bottom-left-radius: 4px;
+        }
+        .eeg-msg.user {
+            align-self: flex-end;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-bottom-right-radius: 4px;
+        }
+        .eeg-upload-area {
+            border: 2px dashed rgba(102, 126, 234, 0.35);
+            border-radius: 16px;
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: rgba(102, 126, 234, 0.04);
+            margin-top: 0.25rem;
+        }
+        .eeg-upload-area:hover, .eeg-upload-area.dragover {
+            border-color: #667eea;
+            background: rgba(102, 126, 234, 0.08);
+        }
+        .eeg-upload-area p {
+            font-size: 0.8rem;
+            color: #5a5a6a;
+            margin-top: 0.4rem;
+        }
+        .eeg-file-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-top: 0.5rem;
+        }
+        .eeg-file-tag {
+            background: rgba(102, 126, 234, 0.12);
+            color: #5a3f99;
+            padding: 0.25rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        .eeg-file-tag button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #5a3f99;
+            font-size: 0.9rem;
+            line-height: 1;
+            padding: 0;
+        }
+        .eeg-dialog-footer {
+            padding: 0.75rem 1.25rem 1.25rem;
+            background: rgba(255, 255, 255, 0.5);
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .eeg-dialog-footer input[type="text"] {
+            width: 100%;
+            padding: 0.6rem 0.9rem;
+            border-radius: 20px;
+            border: 1px solid rgba(0,0,0,0.08);
+            background: rgba(255,255,255,0.8);
+            font-size: 0.875rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .eeg-dialog-footer input[type="text"]:focus {
+            border-color: #667eea;
+        }
+        .eeg-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+        .eeg-actions button {
+            flex: 1;
+            padding: 0.55rem 0;
+            border-radius: 20px;
+            border: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .eeg-btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .eeg-btn-primary:hover {
+            opacity: 0.92;
+        }
+        .eeg-btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .eeg-btn-secondary {
+            background: rgba(0,0,0,0.04);
+            color: var(--primary);
+        }
+        .eeg-btn-secondary:hover {
+            background: rgba(0,0,0,0.08);
+        }
+        .eeg-progress {
+            height: 4px;
+            background: rgba(0,0,0,0.06);
+            border-radius: 2px;
+            overflow: hidden;
+            margin-top: 0.25rem;
+            display: none;
+        }
+        .eeg-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        .eeg-token-input {
+            display: none;
+            flex-direction: column;
+            gap: 0.4rem;
+            margin-top: 0.5rem;
+        }
+        .eeg-token-input input {
+            width: 100%;
+            padding: 0.5rem 0.75rem;
+            border-radius: 12px;
+            border: 1px solid rgba(0,0,0,0.08);
+            background: rgba(255,255,255,0.8);
+            font-size: 0.8rem;
+            outline: none;
+        }
+        .eeg-token-input.open {
+            display: flex;
+        }
+        @media (max-width: 480px) {
+            .eeg-dialog {
+                left: 1rem;
+                width: calc(100vw - 2rem);
+                height: calc(100vh - 7rem);
+            }
+            .eeg-widget-btn {
+                left: 1rem;
+                bottom: 1.5rem;
+            }
+        }
     </style>
 </head>
 <body class="text-slate-900">
@@ -1096,6 +1358,48 @@
         </div>
     </footer>
 
+    <!-- EEG Data Upload Widget -->
+    <button id="eeg-widget-btn" class="eeg-widget-btn" title="脑电数据上传">
+        <iconify-icon icon="mdi:cloud-upload" width="24" height="24"></iconify-icon>
+    </button>
+
+    <div id="eeg-dialog" class="eeg-dialog">
+        <div class="eeg-dialog-header">
+            <h4><iconify-icon icon="mdi:brain"></iconify-icon> 脑电数据上传助手</h4>
+            <button id="eeg-close-btn" class="eeg-close-btn">
+                <iconify-icon icon="mdi:close" width="18" height="18"></iconify-icon>
+            </button>
+        </div>
+        <div id="eeg-messages" class="eeg-messages">
+            <div class="eeg-msg bot">
+                你好！我是脑电数据上传助手 👋<br>
+                你可以在这里上传脑电数据包（支持 EDF、MAT、CSV 等格式），数据将存储至 GitHub 云端仓库。
+            </div>
+            <div class="eeg-msg bot">
+                <div id="eeg-upload-area" class="eeg-upload-area">
+                    <iconify-icon icon="mdi:file-upload" style="font-size: 1.5rem; color: #667eea;"></iconify-icon>
+                    <p>点击或拖拽文件到此处上传</p>
+                    <input type="file" id="eeg-file-input" multiple style="display: none;" accept=".edf,.mat,.csv,.txt,.json,.zip,.gz">
+                </div>
+                <div id="eeg-file-list" class="eeg-file-list"></div>
+                <div class="eeg-progress" id="eeg-progress"><div class="eeg-progress-bar" id="eeg-progress-bar"></div></div>
+            </div>
+        </div>
+        <div class="eeg-dialog-footer">
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 0.5rem;">
+                <input type="text" id="eeg-desc" placeholder="为上传的数据添加描述（可选）...">
+            </div>
+            <div class="eeg-token-input" id="eeg-token-wrap">
+                <input type="password" id="eeg-token" placeholder="输入 GitHub Personal Access Token">
+                <p style="font-size: 0.7rem; color: #888;">Token 仅保存在浏览器本地，用于向仓库上传文件。</p>
+            </div>
+            <div class="eeg-actions">
+                <button id="eeg-setting-btn" class="eeg-btn-secondary">配置 Token</button>
+                <button id="eeg-send-btn" class="eeg-btn-primary" disabled>上传至云端</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Back to Top -->
     <button id="back-to-top">
         <iconify-icon icon="mdi:arrow-up" width="20" height="20"></iconify-icon>
@@ -1154,6 +1458,159 @@
                 header.classList.remove('shadow-lg');
             }
         });
+
+        // EEG Data Upload Widget
+        (function() {
+            const widgetBtn = document.getElementById('eeg-widget-btn');
+            const dialog = document.getElementById('eeg-dialog');
+            const closeBtn = document.getElementById('eeg-close-btn');
+            const messages = document.getElementById('eeg-messages');
+            const uploadArea = document.getElementById('eeg-upload-area');
+            const fileInput = document.getElementById('eeg-file-input');
+            const fileList = document.getElementById('eeg-file-list');
+            const descInput = document.getElementById('eeg-desc');
+            const sendBtn = document.getElementById('eeg-send-btn');
+            const settingBtn = document.getElementById('eeg-setting-btn');
+            const tokenWrap = document.getElementById('eeg-token-wrap');
+            const tokenInput = document.getElementById('eeg-token');
+            const progressBar = document.getElementById('eeg-progress-bar');
+            const progressWrap = document.getElementById('eeg-progress');
+
+            let selectedFiles = [];
+            const REPO_OWNER = 'Zhou-qixiang';
+            const REPO_NAME = 'datascienceyang.github.io';
+            const UPLOAD_PATH = 'eeg-uploads';
+
+            widgetBtn.addEventListener('click', () => dialog.classList.toggle('open'));
+            closeBtn.addEventListener('click', () => dialog.classList.remove('open'));
+
+            settingBtn.addEventListener('click', () => {
+                tokenWrap.classList.toggle('open');
+                if (tokenWrap.classList.contains('open')) tokenInput.focus();
+            });
+
+            uploadArea.addEventListener('click', () => fileInput.click());
+            uploadArea.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                uploadArea.classList.add('dragover');
+            });
+            uploadArea.addEventListener('dragleave', () => uploadArea.classList.remove('dragover'));
+            uploadArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                uploadArea.classList.remove('dragover');
+                handleFiles(e.dataTransfer.files);
+            });
+            fileInput.addEventListener('change', () => handleFiles(fileInput.files));
+
+            function handleFiles(fileListObj) {
+                const files = Array.from(fileListObj);
+                if (!files.length) return;
+                selectedFiles = selectedFiles.concat(files);
+                renderFileList();
+                addMessage('user', `已选择 ${files.length} 个文件，准备上传。`);
+                sendBtn.disabled = selectedFiles.length === 0;
+            }
+
+            function renderFileList() {
+                fileList.innerHTML = '';
+                selectedFiles.forEach((file, idx) => {
+                    const tag = document.createElement('div');
+                    tag.className = 'eeg-file-tag';
+                    tag.innerHTML = `<span>${file.name}</span><button data-idx="${idx}">×</button>`;
+                    fileList.appendChild(tag);
+                });
+                fileList.querySelectorAll('button').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        selectedFiles.splice(parseInt(btn.dataset.idx), 1);
+                        renderFileList();
+                        sendBtn.disabled = selectedFiles.length === 0;
+                    });
+                });
+            }
+
+            function addMessage(role, html) {
+                const msg = document.createElement('div');
+                msg.className = 'eeg-msg ' + role;
+                msg.innerHTML = html;
+                messages.appendChild(msg);
+                messages.scrollTop = messages.scrollHeight;
+            }
+
+            sendBtn.addEventListener('click', async () => {
+                if (!selectedFiles.length) return;
+                const token = tokenInput.value.trim();
+                if (!token) {
+                    addMessage('bot', '⚠️ 请先配置 GitHub Personal Access Token，否则无法上传至仓库。点击下方的「配置 Token」按钮输入。');
+                    tokenWrap.classList.add('open');
+                    return;
+                }
+                sendBtn.disabled = true;
+                progressWrap.style.display = 'block';
+                progressBar.style.width = '0%';
+
+                const desc = descInput.value.trim();
+                const total = selectedFiles.length;
+                let successCount = 0;
+                let failCount = 0;
+
+                for (let i = 0; i < total; i++) {
+                    const file = selectedFiles[i];
+                    progressBar.style.width = `${Math.round(((i) / total) * 100)}%`;
+                    try {
+                        const base64 = await readFileAsBase64(file);
+                        const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+                        const fileName = `${timestamp}_${file.name}`;
+                        const apiUrl = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${UPLOAD_PATH}/${encodeURIComponent(fileName)}`;
+                        const body = {
+                            message: `Upload EEG data: ${file.name}` + (desc ? `\n\nDescription: ${desc}` : ''),
+                            content: base64
+                        };
+                        const res = await fetch(apiUrl, {
+                            method: 'PUT',
+                            headers: {
+                                'Authorization': `token ${token}`,
+                                'Accept': 'application/vnd.github.v3+json',
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(body)
+                        });
+                        if (res.ok) {
+                            successCount++;
+                            const data = await res.json();
+                            addMessage('bot', `✅ <b>${file.name}</b> 上传成功！<br><a href="${data.content.html_url}" target="_blank" style="color:#667eea;text-decoration:underline;">查看文件</a>`);
+                        } else {
+                            const err = await res.json().catch(() => ({}));
+                            failCount++;
+                            addMessage('bot', `❌ <b>${file.name}</b> 上传失败：${err.message || res.statusText} (${res.status})`);
+                        }
+                    } catch (e) {
+                        failCount++;
+                        addMessage('bot', `❌ <b>${file.name}</b> 上传异常：${e.message}`);
+                    }
+                }
+                progressBar.style.width = '100%';
+                setTimeout(() => { progressWrap.style.display = 'none'; progressBar.style.width = '0%'; }, 600);
+
+                addMessage('bot', `上传完成：成功 ${successCount} 个，失败 ${failCount} 个。`);
+                if (successCount > 0) {
+                    addMessage('bot', `📁 所有文件已存储至仓库 <b>${REPO_OWNER}/${REPO_NAME}</b> 的 <code>${UPLOAD_PATH}</code> 目录中。`);
+                }
+                selectedFiles = [];
+                renderFileList();
+                descInput.value = '';
+                sendBtn.disabled = true;
+            });
+
+            function readFileAsBase64(file) {
+                return new Promise((resolve, reject) => {
+                    const reader = new FileReader();
+                    reader.onload = () => resolve(reader.result.split(',')[1]);
+                    reader.onerror = reject;
+                    reader.readAsDataURL(file);
+                });
+            }
+        })();
     </script>
 </body>
 </html>
